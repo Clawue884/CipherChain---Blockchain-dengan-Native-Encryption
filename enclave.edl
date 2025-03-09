@@ -1,0 +1,10 @@
+enclave {
+    trusted {
+        public sgx_status_t encrypt_data([in, size=data_len] uint8_t *data, size_t data_len,
+                                         [in, size=key_len] uint8_t *key, size_t key_len,
+                                         [out, size=data_len+SGX_AESGCM_MAC_SIZE+SGX_AESGCM_IV_SIZE] uint8_t *output);
+        public sgx_status_t decrypt_data([in, size=enc_len] uint8_t *encrypted_data, size_t enc_len,
+                                         [in, size=key_len] uint8_t *key, size_t key_len,
+                                         [out, size=enc_len-SGX_AESGCM_MAC_SIZE-SGX_AESGCM_IV_SIZE] uint8_t *output);
+    };
+};
